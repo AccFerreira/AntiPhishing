@@ -6,7 +6,7 @@ class AppSvgs {
   static const String informationBottomIcon = "asset/images/information_bottom_icon_svg";
   static const String logoAppIcon = "asset/images/logo_app_icon_svg";
   static const String logoIcon = "asset/images/logo_icon_svg";
-  static const String orthographyIcon = "asset/images/orthography_icon_svg";
+  static const String orthographyBottomIcon = "asset/images/orthography_bottom_icon_svg";
   static const String phoneAlertIcon = "asset/images/phone_alert_icon_svg";
   static const String resultVerificationFalseIcon = "asset/images/result_verification_false_icon_svg";
   static const String resultVerificationTrueIcon = "asset/images/result_verification_true_icon_svg";

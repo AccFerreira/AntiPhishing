@@ -3,6 +3,7 @@ import 'package:antiphishing/presentation/screens/main/main_bloc.dart';
 import 'package:antiphishing/presentation/screens/main/widgets/bottom_navigation_item.dart';
 import 'package:antiphishing/presentation/screens/main/widgets/main_bottom_navigation.dart';
 import 'package:antiphishing/presentation/screens/navigator/navigators_controller.dart';
+import 'package:antiphishing/presentation/screens/verified_url/verified_url_entry.dart';
 import 'package:antiphishing/presentation/shared/on_context_ready.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,9 +66,7 @@ class _MainScreenState extends State<MainScreen> with OnContextReady {
   Widget _buildPageContent(BottomNavigationItem item) {
     switch (item) {
       case BottomNavigationItem.verifiedUrl:
-        return Container(
-          color: Colors.blue,
-        );
+        return const VerifiedUrlEntry();
       case BottomNavigationItem.verifiedText:
         return Container(
           color: Colors.pink,

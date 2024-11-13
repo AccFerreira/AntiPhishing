@@ -1,9 +1,16 @@
 class AppText {
+  static const String antiPhishing = "AntiPhishing";
+
   static const String insertUrl = "Insira uma URL para verificação de Phishing:";
   static const String insertText = "Insira um texto para verificação de erros gramaticais:";
   static const String sendUrl = "Enviar Url";
   static const String sendText = "Enviar Texto";
   static const String warning = "Atenção";
+
+  static const String verifiedText = "Verificar Texto";
+  static const String verifiedUrl = "Verificar URL";
+  static const String information = "Informações";
+
   static const String warningText =
       "O resultado da análise de Phishing pode não ser 100% preciso. É necessária uma avaliação do próprio usuário sobre a origem da URL.";
   static const String whatIsPhishing = "O que é phishing?";

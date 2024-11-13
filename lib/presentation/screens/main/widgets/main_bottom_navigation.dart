@@ -1,11 +1,11 @@
 import 'package:antiphishing/presentation/constants/app_colors.dart';
-import 'package:antiphishing/presentation/constants/app_svgs.dart';
+import 'package:antiphishing/presentation/constants/app_text.dart';
+import 'package:antiphishing/presentation/constants/app_webp.dart';
 import 'package:antiphishing/presentation/screens/main/widgets/bottom_navigation_item.dart';
-import 'package:antiphishing/presentation/widgets/svg_image.dart';
 import 'package:flutter/material.dart';
 
 class MainBottomNavigation extends StatelessWidget {
-  static const double bottomNavigationHeight = 65;
+  static const double bottomNavigationHeight = 70;
 
   final BottomNavigationItem currentItem;
   final void Function(BottomNavigationItem selectedItem) onItemSelected;
@@ -30,26 +30,25 @@ class MainBottomNavigation extends StatelessWidget {
         SizedBox(
           height: bottomNavigationHeight + safeAreaBottomOffset,
           child: BottomNavigationBar(
+            selectedLabelStyle: const TextStyle(fontSize: 12.0, color: AppColors.white, fontWeight: FontWeight.bold),
+            unselectedLabelStyle: const TextStyle(fontSize: 12.0, color: AppColors.white),
             backgroundColor: AppColors.primaryColor,
-            elevation: 32,
-            enableFeedback: false,
+            elevation: 15,
+            useLegacyColorScheme: false,
             currentIndex: currentItem.index,
             onTap: (index) => onItemSelected(BottomNavigationItem.values[index]),
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: SvgImage(assetName: AppSvgs.searchBottomIcon, height: 24.0, width: 24.0),
-                activeIcon: SvgImage(assetName: AppSvgs.searchBottomIcon, height: 30.0, width: 30.0),
-                label: "",
+                icon: Image.asset(AppWebp.searchIcon ,height: 35.0, width: 35.0),
+                label: AppText.verifiedUrl,
               ),
               BottomNavigationBarItem(
-                icon: SvgImage(assetName: AppSvgs.orthographyBottomIcon, height: 24.0, width: 24.0),
-                activeIcon: SvgImage(assetName: AppSvgs.orthographyBottomIcon, height: 30.0, width: 30.0),
-                label: "",
+                icon: Image.asset(AppWebp.orthographyIcon ,height: 35.0, width: 35.0),
+                label: AppText.verifiedText,
               ),
               BottomNavigationBarItem(
-                icon: SvgImage(assetName: AppSvgs.informationBottomIcon, height: 24.0, width: 24.0),
-                activeIcon: SvgImage(assetName: AppSvgs.informationBottomIcon, height: 30.0, width: 30.0),
-                label: "",
+                icon: Image.asset(AppWebp.informationIcon ,height: 35.0, width: 35.0),
+                label: AppText.information,
               ),
             ],
           ),

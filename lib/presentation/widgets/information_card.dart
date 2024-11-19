@@ -51,7 +51,7 @@ class InformationCard extends StatelessWidget {
                     description,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      fontSize: 14.0,
+                      fontSize: 16.0,
                       color: AppColors.grey1A,
                     ),
                   ),

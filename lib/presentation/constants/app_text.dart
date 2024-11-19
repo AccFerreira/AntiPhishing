@@ -11,6 +11,7 @@ class AppText {
   static const String verifiedUrl = "Verificar URL";
   static const String information = "Informações";
   static const String pasteUrl = "Cole a URL aqui";
+  static const String pasteText = "Cole o texto aqui";
 
   static const String warningText =
       "O resultado da análise de Phishing pode não ser 100% preciso. É necessária uma avaliação do próprio usuário sobre a origem do texto.";

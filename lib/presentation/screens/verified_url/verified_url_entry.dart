@@ -1,3 +1,4 @@
+import 'package:antiphishing/di/di_setup.dart';
 import 'package:antiphishing/presentation/screens/verified_url/verified_url_bloc.dart';
 import 'package:antiphishing/presentation/screens/verified_url/verified_url_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,7 @@ class VerifiedUrlEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return VerifiedUrlBloc(
-        )..init();
+        return VerifiedUrlBloc(getIt());
       },
       child: const VerifiedUrlScreen(),
     );

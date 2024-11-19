@@ -24,12 +24,11 @@ class VerificationResultModal extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: InkWell(
-                onTap: () => Navigator.of(context).pop(),
-                child: const Icon(
-                  Icons.close_rounded,
-                  color: AppColors.grey1A,
-                ),
+              child: IconButton(
+                icon: const Icon(Icons.close_rounded),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ),
             const SizedBox(height: 8.0),

@@ -16,6 +16,7 @@ class DefaultButton extends StatelessWidget {
     return TextButton(
       onPressed: onTap,
       style: TextButton.styleFrom(
+        backgroundColor: onTap == null ? AppColors.greyC2 : AppColors.primaryColor,
         overlayColor: AppColors.greyF2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -27,8 +28,9 @@ class DefaultButton extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(
-          fontSize: 20.0,
-          color: AppColors.grey1A,
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.white,
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:antiphishing/di/di_setup.dart';
 import 'package:antiphishing/presentation/screens/verified_orthography/verified_orthography_bloc.dart';
 import 'package:antiphishing/presentation/screens/verified_orthography/verified_orthography_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,7 @@ class VerifiedOrthographyEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return VerifiedOrthographyBloc(
-        )..init();
+        return VerifiedOrthographyBloc(getIt());
       },
       child: const VerifiedOrthographyScreen(),
     );

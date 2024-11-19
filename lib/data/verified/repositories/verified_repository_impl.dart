@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:antiphishing/domain/verified/repository/verified_repository.dart';
+import 'package:http/http.dart' as http;
 
 class VerifiedRepositoryImpl extends VerifiedRepository {
   static const apiKey = "AIzaSyD4gdHhlJqFAUBQ_Zm5cfZmbp_-gxYQqjI";

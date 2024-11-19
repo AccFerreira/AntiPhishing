@@ -1,8 +1,10 @@
 import 'package:antiphishing/di/inherited_widget_dependencies.dart';
+import 'package:antiphishing/presentation/screens/information/information_entry.dart';
 import 'package:antiphishing/presentation/screens/main/main_bloc.dart';
 import 'package:antiphishing/presentation/screens/main/widgets/bottom_navigation_item.dart';
 import 'package:antiphishing/presentation/screens/main/widgets/main_bottom_navigation.dart';
 import 'package:antiphishing/presentation/screens/navigator/navigators_controller.dart';
+import 'package:antiphishing/presentation/screens/verified_orthography/verified_orthography_entry.dart';
 import 'package:antiphishing/presentation/screens/verified_url/verified_url_entry.dart';
 import 'package:antiphishing/presentation/shared/on_context_ready.dart';
 import 'package:flutter/material.dart';
@@ -68,13 +70,9 @@ class _MainScreenState extends State<MainScreen> with OnContextReady {
       case BottomNavigationItem.verifiedUrl:
         return const VerifiedUrlEntry();
       case BottomNavigationItem.verifiedText:
-        return Container(
-          color: Colors.pink,
-        );
+        return const VerifiedOrthographyEntry();
       case BottomNavigationItem.info:
-        return Container(
-          color: Colors.yellow,
-        );
+        return const InformationEntry();
     }
   }
 }

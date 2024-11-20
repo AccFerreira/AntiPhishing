@@ -88,6 +88,23 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                 ? () async {
                                     FocusScope.of(context).unfocus();
                                     await Future.delayed(const Duration(milliseconds: 100));
+
+                                    final doesUrlExists = await bloc.doesUrlExists(_urlController.value.text);
+
+                                    if(!doesUrlExists && context.mounted) {
+                                      await showDialog<Map<String, dynamic>>(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (BuildContext context) {
+                                          return const VerificationResultModal(
+                                            imageUrl: AppWebp.urlNotFoundIllustration,
+                                            text: AppText.notFoundUrl,
+                                          );
+                                        },
+                                      );
+                                      return;
+                                    }
+
                                     final isASafeUrl = await bloc.isASafeUrl(_urlController.value.text);
                                     if (isASafeUrl && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(

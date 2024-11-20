@@ -13,7 +13,10 @@ class VerifiedUrlEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return VerifiedUrlBloc(getIt());
+        return VerifiedUrlBloc(
+          getIt(),
+          getIt(),
+        );
       },
       child: const VerifiedUrlScreen(),
     );

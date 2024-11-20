@@ -15,7 +15,7 @@ class VerifiedOrthographyBloc extends Cubit<VerifiedOrthographyState> {
     emit(state.copyWith(isLoading: true));
     final result = await _hasOrthographyMistakes(text);
     emit(state.copyWith(isLoading: false));
-    return result;
+    return !result;
   }
 
   void onDataUpdate(String text) async {

@@ -18,6 +18,7 @@ class AppText {
   static const String warningUrl =
       "O resultado da análise de Phishing pode não ser 100% preciso. É necessária uma avaliação do próprio usuário sobre a origem da URL.";
   static const String whatIsPhishing = "O que é phishing?";
+  static const String notFoundUrl = "A url inserida não foi encontrada, tente modificá-la ou inserir uma nova!";
   static const String whatIsPhishingDescription =
       "É uma forma de roubar dados dos usuários por meio de sites e mensagens enganosas.";
   static const String howToProtectYourself = "Como se proteger?";

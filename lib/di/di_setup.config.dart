@@ -12,6 +12,8 @@ import 'package:antiphishing/di/navigators_module.dart' as _i533;
 import 'package:antiphishing/di/verified_module.dart' as _i801;
 import 'package:antiphishing/domain/verified/repository/verified_repository.dart'
     as _i399;
+import 'package:antiphishing/domain/verified/use_cases/does_url_exists.dart'
+    as _i1036;
 import 'package:antiphishing/domain/verified/use_cases/has_orthography_mistakes.dart'
     as _i623;
 import 'package:antiphishing/domain/verified/use_cases/is_a_safe_url.dart'
@@ -42,6 +44,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i623.HasOrthographyMistakes(gh<_i399.VerifiedRepository>()));
     gh.factory<_i546.IsASafeUrl>(
         () => _i546.IsASafeUrl(gh<_i399.VerifiedRepository>()));
+    gh.factory<_i1036.DoesUrlExists>(
+        () => _i1036.DoesUrlExists(gh<_i399.VerifiedRepository>()));
     return this;
   }
 }

@@ -31,7 +31,6 @@ class VerificationResultModal extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 8.0),
             Image.asset(imageUrl, width: 168, height: 145),
             const SizedBox(height: 16.0),
             Text(

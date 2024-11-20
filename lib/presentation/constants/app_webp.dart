@@ -7,6 +7,7 @@ class AppWebp {
   static const String phoneAndSearchIcon = "assets/images/phone_and_search_icon.webp";
   static const String resultVerificationFalseIcon = "assets/images/result_verification_false_icon.webp";
   static const String resultVerificationTrueIcon = "assets/images/result_verification_true_icon.webp";
+  static const String urlNotFoundIllustration = "assets/images/url_not_found_illustration.webp";
   static const String searchIcon = "assets/images/search_icon.webp";
   static const String virusIcon = "assets/images/virus_icon.webp";
   static const String logoIcon = "assets/images/logo_icon.webp";

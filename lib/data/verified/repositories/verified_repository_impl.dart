@@ -1,50 +1,54 @@
 import 'dart:convert';
 
+import 'package:antiphishing/data/verified/repositories/keys/keys.dart';
 import 'package:antiphishing/domain/verified/repository/verified_repository.dart';
 import 'package:http/http.dart' as http;
 
 class VerifiedRepositoryImpl extends VerifiedRepository {
-  static const apiKey = "AIzaSyD4gdHhlJqFAUBQ_Zm5cfZmbp_-gxYQqjI";
-  static const apiUrl = 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=$apiKey';
+  static const apiSafeBrowsingUrl = 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=$apiKey';
+  static const apiLanguageToolUrl = 'https://api.languagetool.org/v2/check';
 
   @override
   Future<bool> hasOrthographyMistakes(String text) async {
-    return false;
-    final body = {
-      "client": {
-        "clientId": "sua_aplicacao",
-        "clientVersion": "1.0"
+    final response = await http.post(
+      Uri.parse(apiLanguageToolUrl),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: {
+        'text': text,
+        'language': 'pt-BR',
       },
-      "threatInfo": {
-        "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING", "PHISHING"],
-        "platformTypes": ["ANY_PLATFORM"],
-        "threatEntryTypes": ["URL"],
-        "threatEntries": [
-          {"url": text}
-        ]
-      }
-    };
-
-    final response = await http.post(Uri.parse(apiUrl), body: json.encode(body));
+    );
 
     if (response.statusCode == 200) {
-      final result = json.decode(response.body);
-      return result['matches'] == null;
+      final result = jsonDecode(response.body);
+      if (result['matches'].isEmpty) {
+        return false;
+      }
+      if (result['matches'].length == 1 && result['matches'].first['rule']['id'] == 'UPPERCASE_SENTENCE_START') {
+        return false;
+      }
+      return true;
     } else {
-      throw Exception('Erro ao verificar URL: ${response.statusCode}');
+      throw Exception('Erro ao verificar texto: ${response.statusCode}');
+    }
+  }
+
+  @override
+  Future<bool> doesUrlExist(String url) async {
+    try {
+      final response = await http.head(Uri.parse(url));
+      return response.statusCode >= 200 && response.statusCode < 400;
+    } catch (e) {
+      return false;
     }
   }
 
   @override
   Future<bool> isASafeUrl(String url) async {
-    return true;
     final body = {
-      "client": {
-        "clientId": "sua_aplicacao",
-        "clientVersion": "1.0"
-      },
+      "client": {"clientId": "anti_phishing", "clientVersion": "1.0"},
       "threatInfo": {
-        "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING", "PHISHING"],
+        "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING", "POTENTIALLY_HARMFUL_APPLICATION"],
         "platformTypes": ["ANY_PLATFORM"],
         "threatEntryTypes": ["URL"],
         "threatEntries": [
@@ -53,7 +57,11 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
       }
     };
 
-    final response = await http.post(Uri.parse(apiUrl), body: json.encode(body));
+    final response = await http.post(
+      Uri.parse(apiSafeBrowsingUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(body),
+    );
 
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
@@ -62,5 +70,4 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
       throw Exception('Erro ao verificar URL: ${response.statusCode}');
     }
   }
-
 }

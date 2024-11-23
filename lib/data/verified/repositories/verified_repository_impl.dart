@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:antiphishing/data/verified/repositories/keys/keys.dart';
@@ -34,17 +35,19 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
   }
 
   @override
-  Future<bool> doesUrlExist(String url) async {
+  Future<bool?> doesUrlExist(String url) async {
     try {
-      final response = await http.head(Uri.parse(url));
+      final response = await http.head(Uri.parse(url)).timeout(const Duration(seconds: 5));
       return response.statusCode >= 200 && response.statusCode < 400;
+    } on TimeoutException {
+      return null;
     } catch (e) {
-      return false;
+      return null;
     }
   }
 
   @override
-  Future<bool> isASafeUrl(String url) async {
+  Future<bool?> isASafeUrl(String url) async {
     final body = {
       "client": {"clientId": "anti_phishing", "clientVersion": "1.0"},
       "threatInfo": {
@@ -57,17 +60,25 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
       }
     };
 
-    final response = await http.post(
-      Uri.parse(apiSafeBrowsingUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(body),
-    );
+    try {
+      final response = await http
+          .post(
+            Uri.parse(apiSafeBrowsingUrl),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode(body),
+          )
+          .timeout(const Duration(seconds: 8));
 
-    if (response.statusCode == 200) {
-      final result = json.decode(response.body);
-      return result['matches'] == null;
-    } else {
-      throw Exception('Erro ao verificar URL: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        final result = json.decode(response.body);
+        return result['matches'] == null;
+      } else {
+        return null;
+      }
+    } on TimeoutException {
+      return null;
+    } catch (e) {
+      return null;
     }
   }
 }

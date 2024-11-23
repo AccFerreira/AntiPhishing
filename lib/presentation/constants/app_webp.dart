@@ -11,4 +11,5 @@ class AppWebp {
   static const String searchIcon = "assets/images/search_icon.webp";
   static const String virusIcon = "assets/images/virus_icon.webp";
   static const String logoIcon = "assets/images/logo_icon.webp";
+  static const String systemErrorIllustration = "assets/images/system_error_illustration.webp";
 }

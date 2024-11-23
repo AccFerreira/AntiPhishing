@@ -15,14 +15,14 @@ class VerifiedUrlBloc extends Cubit<VerifiedUrlState> {
           isButtonEnabled: false,
         ));
 
-  Future<bool> doesUrlExists(String url) async {
+  Future<bool?> doesUrlExists(String url) async {
     emit(state.copyWith(isLoading: true));
     final result = await _doesUrlExists(url);
     emit(state.copyWith(isLoading: false));
     return result;
   }
 
-  Future<bool> isASafeUrl(String url) async {
+  Future<bool?> isASafeUrl(String url) async {
     emit(state.copyWith(isLoading: true));
     final result = await _isASafeUrl(url);
     emit(state.copyWith(isLoading: false));

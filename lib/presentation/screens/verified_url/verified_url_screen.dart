@@ -91,7 +91,21 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
 
                                     final doesUrlExists = await bloc.doesUrlExists(_urlController.value.text);
 
-                                    if(!doesUrlExists && context.mounted) {
+                                    if (doesUrlExists == null && context.mounted) {
+                                      await showDialog<Map<String, dynamic>>(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (BuildContext context) {
+                                          return const VerificationResultModal(
+                                            imageUrl: AppWebp.systemErrorIllustration,
+                                            text: AppText.errorFind,
+                                          );
+                                        },
+                                      );
+                                      return;
+                                    }
+
+                                    if (!doesUrlExists! && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
                                         context: context,
                                         barrierDismissible: false,
@@ -106,7 +120,22 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                     }
 
                                     final isASafeUrl = await bloc.isASafeUrl(_urlController.value.text);
-                                    if (isASafeUrl && context.mounted) {
+
+                                    if (isASafeUrl == null && context.mounted) {
+                                      await showDialog<Map<String, dynamic>>(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (BuildContext context) {
+                                          return const VerificationResultModal(
+                                            imageUrl: AppWebp.systemErrorIllustration,
+                                            text: AppText.errorFind,
+                                          );
+                                        },
+                                      );
+                                      return;
+                                    }
+
+                                    if (isASafeUrl! && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
                                         context: context,
                                         barrierDismissible: false,
@@ -119,7 +148,7 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                       );
                                     }
 
-                                    if(!isASafeUrl && context.mounted) {
+                                    if (!isASafeUrl && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
                                         context: context,
                                         barrierDismissible: false,
@@ -131,8 +160,9 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                         },
                                       );
                                     }
-                                    if(context.mounted) {
+                                    if (context.mounted) {
                                       FocusScope.of(context).requestFocus(FocusNode());
+                                      _urlController.clear();
                                     }
                                   }
                                 : null,

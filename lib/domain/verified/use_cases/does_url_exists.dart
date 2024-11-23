@@ -7,7 +7,7 @@ class DoesUrlExists {
 
   DoesUrlExists(this.repository);
 
-  Future<bool> call(String url) async {
+  Future<bool?> call(String url) async {
     return repository.doesUrlExist(url);
   }
 }

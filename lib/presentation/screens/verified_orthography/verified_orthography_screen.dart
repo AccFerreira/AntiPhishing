@@ -97,7 +97,8 @@ class _VerifiedOrthographyScreenState extends State<VerifiedOrthographyScreen> {
                                 ? () async {
                                     FocusScope.of(context).unfocus();
                                     await Future.delayed(const Duration(milliseconds: 100));
-                                    final isASafeOrthography = await bloc.isASafeOrthography(_textController.value.text);
+                                    final isASafeOrthography =
+                                        await bloc.isASafeOrthography(_textController.value.text);
                                     if (isASafeOrthography && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
                                         context: context,

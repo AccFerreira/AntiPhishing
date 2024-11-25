@@ -88,8 +88,12 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                 ? () async {
                                     FocusScope.of(context).unfocus();
                                     await Future.delayed(const Duration(milliseconds: 100));
+                                    String modifiedUrl = _urlController.value.text.trim();
+                                    if (!modifiedUrl.startsWith("http://") && !modifiedUrl.startsWith("https://")) {
+                                      modifiedUrl = "https://$modifiedUrl";
+                                    }
 
-                                    final doesUrlExists = await bloc.doesUrlExists(_urlController.value.text);
+                                    final doesUrlExists = await bloc.doesUrlExists(modifiedUrl);
 
                                     if (doesUrlExists == null && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
@@ -119,7 +123,7 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
                                       return;
                                     }
 
-                                    final isASafeUrl = await bloc.isASafeUrl(_urlController.value.text);
+                                    final isASafeUrl = await bloc.isASafeUrl(modifiedUrl);
 
                                     if (isASafeUrl == null && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(

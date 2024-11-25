@@ -74,7 +74,9 @@ class _AntiPhishingAppBarState extends State<AntiPhishingAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(AppWebp.logoIcon, height: 45.0, width: 45.0),
-                const SizedBox(width: 8.0,),
+                const SizedBox(
+                  width: 8.0,
+                ),
                 const Text(
                   AppText.antiPhishing,
                   style: TextStyle(

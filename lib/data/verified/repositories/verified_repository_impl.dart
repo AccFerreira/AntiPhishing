@@ -9,9 +9,13 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
   static const apiSafeBrowsingUrl = 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=$apiKey';
   static const apiLanguageToolUrl = 'https://api.languagetool.org/v2/check';
 
+  final http.Client client;
+
+  VerifiedRepositoryImpl(this.client);
+
   @override
   Future<bool> hasOrthographyMistakes(String text) async {
-    final response = await http.post(
+    final response = await client.post(
       Uri.parse(apiLanguageToolUrl),
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: {
@@ -37,7 +41,7 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
   @override
   Future<bool?> doesUrlExist(String url) async {
     try {
-      final response = await http.head(Uri.parse(url)).timeout(const Duration(seconds: 5));
+      final response = await client.head(Uri.parse(url)).timeout(const Duration(seconds: 5));
       return response.statusCode >= 200 && response.statusCode < 400;
     } on TimeoutException {
       return null;
@@ -47,21 +51,19 @@ class VerifiedRepositoryImpl extends VerifiedRepository {
   }
 
   @override
-  Future<bool?> isASafeUrl(String url) async {
+  Future<bool?> isASafeUrls(List<String> urls) async {
     final body = {
       "client": {"clientId": "anti_phishing", "clientVersion": "1.0"},
       "threatInfo": {
         "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING", "POTENTIALLY_HARMFUL_APPLICATION"],
         "platformTypes": ["ANY_PLATFORM"],
         "threatEntryTypes": ["URL"],
-        "threatEntries": [
-          {"url": url}
-        ]
+        "threatEntries": urls.map((e) => {"url": e}).toList()
       }
     };
 
     try {
-      final response = await http
+      final response = await client
           .post(
             Uri.parse(apiSafeBrowsingUrl),
             headers: {'Content-Type': 'application/json'},

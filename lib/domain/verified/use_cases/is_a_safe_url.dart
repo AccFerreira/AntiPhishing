@@ -8,17 +8,15 @@ class IsASafeUrl {
   IsASafeUrl(this.repository);
 
   Future<bool?> call(String url) async {
-    final preparedUrls = _generateVariants(url);
-    for (final preparedUrl in preparedUrls) {
-      final result = await repository.isASafeUrl(preparedUrl);
-      if (result == false) {
-        return false;
-      }
+    final preparedUrls = generateVariants(url);
+    final result = await repository.isASafeUrls(preparedUrls);
+    if (result == false) {
+      return false;
     }
     return true;
   }
 
-  List<String> _generateVariants(String url) {
+  List<String> generateVariants(String url) {
     final uri = Uri.parse(url.trim());
 
     final variants = <String>{
@@ -38,13 +36,13 @@ class IsASafeUrl {
       Uri(
         scheme: 'https',
         host: uri.host,
-        path: '${uri.path}/',
+        path: uri.path.endsWith('/') ? uri.path : '${uri.path}/',
         query: uri.query,
       ).toString(),
       Uri(
         scheme: 'https',
         host: 'www.${uri.host}',
-        path: '${uri.path}/',
+        path: uri.path.endsWith('/') ? uri.path : '${uri.path}/',
         query: uri.query,
       ).toString(),
 
@@ -64,13 +62,13 @@ class IsASafeUrl {
       Uri(
         scheme: 'http',
         host: uri.host,
-        path: '${uri.path}/',
+        path: uri.path.endsWith('/') ? uri.path : '${uri.path}/',
         query: uri.query,
       ).toString(),
       Uri(
         scheme: 'http',
         host: 'www.${uri.host}',
-        path: '${uri.path}/',
+        path: uri.path.endsWith('/') ? uri.path : '${uri.path}/',
         query: uri.query,
       ).toString(),
     };

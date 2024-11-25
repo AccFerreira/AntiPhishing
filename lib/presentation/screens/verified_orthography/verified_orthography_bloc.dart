@@ -7,9 +7,9 @@ class VerifiedOrthographyBloc extends Cubit<VerifiedOrthographyState> {
 
   VerifiedOrthographyBloc(this._hasOrthographyMistakes)
       : super(VerifiedOrthographyState(
-    isLoading: false,
-    isButtonEnabled: false,
-  ));
+          isLoading: false,
+          isButtonEnabled: false,
+        ));
 
   Future<bool> isASafeOrthography(String text) async {
     emit(state.copyWith(isLoading: true));

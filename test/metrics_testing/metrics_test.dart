@@ -2,6 +2,7 @@ import 'package:antiphishing/data/verified/repositories/verified_repository_impl
 import 'package:antiphishing/domain/verified/use_cases/is_a_safe_url.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 
 import 'urls_for_testing.dart';
 
@@ -12,7 +13,7 @@ double calculateMean(List<double> values) {
 void main() {
   group('URL Detection Tests', () {
     test('Calculate Metrics', () async {
-      final verifiedRepositoryImpl = VerifiedRepositoryImpl();
+      final verifiedRepositoryImpl = VerifiedRepositoryImpl(http.Client());
       final isASafeUrl = IsASafeUrl(verifiedRepositoryImpl);
       List<double> responseTimes = [];
       int correctDetections = 0; // URLs classificadas corretamente
@@ -22,19 +23,20 @@ void main() {
       for (var test in urlsForTesting) {
         final startTime = DateTime.now();
         final result = await isASafeUrl(test['url']!);
+        final isAPhishingUrl = result == null ? null : !result;
         final endTime = DateTime.now();
 
         responseTimes.add(endTime.difference(startTime).inMilliseconds.toDouble());
 
-        final expected = !(test['isPhishing'] == "true");
+        final expected = test['isPhishing'] == "true";
 
-        if (result != null) {
-          if (result == expected) {
+        if (isAPhishingUrl != null) {
+          if (isAPhishingUrl == expected) {
             correctDetections++;
-          } else if (result && !expected) {
-            falseNegatives++;
-          } else if (!result && expected) {
+          } else if (isAPhishingUrl && !expected) {
             falsePositives++;
+          } else if (!isAPhishingUrl && expected) {
+            falseNegatives++;
           }
         }
 

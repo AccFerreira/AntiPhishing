@@ -33,8 +33,7 @@ class _$VerifiedUrlStateCWProxyImpl implements _$VerifiedUrlStateCWProxy {
   VerifiedUrlState isLoading(bool isLoading) => this(isLoading: isLoading);
 
   @override
-  VerifiedUrlState isButtonEnabled(bool isButtonEnabled) =>
-      this(isButtonEnabled: isButtonEnabled);
+  VerifiedUrlState isButtonEnabled(bool isButtonEnabled) => this(isButtonEnabled: isButtonEnabled);
 
   @override
 
@@ -53,8 +52,7 @@ class _$VerifiedUrlStateCWProxyImpl implements _$VerifiedUrlStateCWProxy {
           ? _value.isLoading
           // ignore: cast_nullable_to_non_nullable
           : isLoading as bool,
-      isButtonEnabled: isButtonEnabled == const $CopyWithPlaceholder() ||
-              isButtonEnabled == null
+      isButtonEnabled: isButtonEnabled == const $CopyWithPlaceholder() || isButtonEnabled == null
           ? _value.isButtonEnabled
           // ignore: cast_nullable_to_non_nullable
           : isButtonEnabled as bool,

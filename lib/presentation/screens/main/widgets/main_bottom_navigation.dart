@@ -39,15 +39,15 @@ class MainBottomNavigation extends StatelessWidget {
             onTap: (index) => onItemSelected(BottomNavigationItem.values[index]),
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(AppWebp.searchIcon ,height: 35.0, width: 35.0),
+                icon: Image.asset(AppWebp.searchIcon, height: 35.0, width: 35.0),
                 label: AppText.verifiedUrl,
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppWebp.orthographyIcon ,height: 35.0, width: 35.0),
+                icon: Image.asset(AppWebp.orthographyIcon, height: 35.0, width: 35.0),
                 label: AppText.verifiedText,
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppWebp.informationIcon ,height: 35.0, width: 35.0),
+                icon: Image.asset(AppWebp.informationIcon, height: 35.0, width: 35.0),
                 label: AppText.information,
               ),
             ],

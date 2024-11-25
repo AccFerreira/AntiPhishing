@@ -24,19 +24,16 @@ abstract class _$VerifiedOrthographyStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVerifiedOrthographyState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVerifiedOrthographyState.copyWith.fieldName(...)`
-class _$VerifiedOrthographyStateCWProxyImpl
-    implements _$VerifiedOrthographyStateCWProxy {
+class _$VerifiedOrthographyStateCWProxyImpl implements _$VerifiedOrthographyStateCWProxy {
   const _$VerifiedOrthographyStateCWProxyImpl(this._value);
 
   final VerifiedOrthographyState _value;
 
   @override
-  VerifiedOrthographyState isLoading(bool isLoading) =>
-      this(isLoading: isLoading);
+  VerifiedOrthographyState isLoading(bool isLoading) => this(isLoading: isLoading);
 
   @override
-  VerifiedOrthographyState isButtonEnabled(bool isButtonEnabled) =>
-      this(isButtonEnabled: isButtonEnabled);
+  VerifiedOrthographyState isButtonEnabled(bool isButtonEnabled) => this(isButtonEnabled: isButtonEnabled);
 
   @override
 
@@ -55,8 +52,7 @@ class _$VerifiedOrthographyStateCWProxyImpl
           ? _value.isLoading
           // ignore: cast_nullable_to_non_nullable
           : isLoading as bool,
-      isButtonEnabled: isButtonEnabled == const $CopyWithPlaceholder() ||
-              isButtonEnabled == null
+      isButtonEnabled: isButtonEnabled == const $CopyWithPlaceholder() || isButtonEnabled == null
           ? _value.isButtonEnabled
           // ignore: cast_nullable_to_non_nullable
           : isButtonEnabled as bool,
@@ -67,6 +63,5 @@ class _$VerifiedOrthographyStateCWProxyImpl
 extension $VerifiedOrthographyStateCopyWith on VerifiedOrthographyState {
   /// Returns a callable class that can be used as follows: `instanceOfVerifiedOrthographyState.copyWith(...)` or like so:`instanceOfVerifiedOrthographyState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VerifiedOrthographyStateCWProxy get copyWith =>
-      _$VerifiedOrthographyStateCWProxyImpl(this);
+  _$VerifiedOrthographyStateCWProxy get copyWith => _$VerifiedOrthographyStateCWProxyImpl(this);
 }

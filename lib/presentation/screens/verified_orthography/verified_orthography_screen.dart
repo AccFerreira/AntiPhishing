@@ -126,6 +126,7 @@ class _VerifiedOrthographyScreenState extends State<VerifiedOrthographyScreen> {
                                     }
                                     if (context.mounted) {
                                       FocusScope.of(context).requestFocus(FocusNode());
+                                      _textController.clear();
                                     }
                                   }
                                 : null,

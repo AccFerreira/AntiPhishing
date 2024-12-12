@@ -95,7 +95,7 @@ class _VerifiedUrlScreenState extends State<VerifiedUrlScreen> {
 
                                     final doesUrlExists = await bloc.doesUrlExists(modifiedUrl);
 
-                                    if ((doesUrlExists == null || !doesUrlExists) && context.mounted) {
+                                    if ((doesUrlExists != null && !doesUrlExists) && context.mounted) {
                                       await showDialog<Map<String, dynamic>>(
                                         context: context,
                                         barrierDismissible: false,
